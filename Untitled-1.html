@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The8</title>
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: transparent;
+    }
+
+    #app {
+      position: relative;
+      z-index: 1;
+    }
+
+    #canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 60px 40px;
+      color: white;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+
+    header, section, footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* NAVBAR */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(36, 36, 36, 0);
+      padding: 20px 40px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffffff6c;
+    }
+
+    .logo span {
+      color: #ffffff;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    nav ul li a:hover {
+      color: #707070;
+    }
+
+    /* HERO */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+      padding: 80px 20px;
+      color: white;
+    }
+
+    .hero img {
+      width: 400px;
+      max-width: 100%;
+      border-radius: 10px;
+      image-rendering: auto;
+    }
+
+    .hero-content {
+      max-width: 500px;
+    }
+
+    .hero-content h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: rgb(255, 255, 255);
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      background-color: #c5c5c5;
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      background-color: #2b2b2b;
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      color: white;
+    }
+
+    section ul {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 18px;
+      color: white;
+    }
+
+    footer {
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <div id="app">
+    <!-- NAVBAR -->
+    <header>
+      <div class="logo">The<span>8</span></div>
+      <nav>
+        <ul>
+          <li><a href="#detalhes">Detalhes</a></li>
+          <li><a href="#feedbacks">Feedbacks</a></li>
+          <li><a href="#overview">Overview</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <!-- <img src="nyan-cat.gif"> -->
+      <div class="hero-content">
+        <h1>treinando HTML/CSS/JAVASCRIPT</h1>
+        <p>teste...</p>
+        <button class="btn">NÃO CLIQUE AQUI</button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>&copy; The8. Todos os direitos reservados.</p>
+    </footer>
+  </div>
+
+  <script type="module">
+    import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js"
+
+    const app = TubesCursor(document.getElementById('canvas'), {
+      tubes: {
+        colors: ["#f967fb", "#53bc28", "#6958d5"],
+        lights: {
+          intensity: 200,
+          colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"]
+        }
+      }
+    })
+
+    // Muda as cores ao clicar
+    document.body.addEventListener('click', () => {
+      const colors = randomColors(3)
+      const lightsColors = randomColors(4)
+      app.tubes.setColors(colors)
+      app.tubes.setLightsColors(lightsColors)
+    })
+
+    function randomColors (count) {
+      return new Array(count)
+        .fill(0)
+        .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'))
+    }
+  </script>
+</body>
+</html>
